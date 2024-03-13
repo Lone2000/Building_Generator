@@ -4,9 +4,14 @@ import styles from "./InputForm.module.css";
 
 function InputForm() {
   const [floor, setFloor] = useState();
+  const [shape, setShape] = useState();
 
   const handleFloorChange = (e) => {
     setFloor(e.target.value);
+  };
+
+  const handleShapeChange = (e) => {
+    setShape(e.target.value);
   };
 
   return (
@@ -23,6 +28,13 @@ function InputForm() {
             className={styles.slider}
             onChange={handleFloorChange}
           />
+        </div>
+        <div className={styles.shapepicker}>
+          <label htmlFor="shape">Pick a Shape</label>
+          <select name="shape" id="shapepicker" onChange={handleShapeChange}>
+            <option value="square">Square</option>
+            <option value="square">Rectangle</option>
+          </select>
         </div>
       </form>
     </>
