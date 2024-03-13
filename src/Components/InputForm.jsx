@@ -1,22 +1,32 @@
 import { useState } from "react";
 
 import styles from "./InputForm.module.css";
+import Generator from "./Generator";
 
 function InputForm() {
-  const [floor, setFloor] = useState();
-  const [shape, setShape] = useState();
+  const [floor, setFloor] = useState(2); // Default Value for Floor
+  const [shape, setShape] = useState("rectangle"); // Default Value for Shape
+  const [submitted, setSubmitted] = useState(false);
 
   const handleFloorChange = (e) => {
-    setFloor(e.target.value);
+    setFloor(parseInt(e.target.value));
   };
 
   const handleShapeChange = (e) => {
     setShape(e.target.value);
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Pass the Shape and Floor Information to the Generator
+    setFloor(e.target[0].value);
+    setShape(e.target[1].value);
+    setSubmitted(true);
+  };
+
   return (
     <>
-      <form action="">
+      <form onSubmit={handleFormSubmit}>
         <div className={styles.slidecontainer}>
           <label htmlFor="build_floors">{floor} Floors</label>
           <input
@@ -33,10 +43,12 @@ function InputForm() {
           <label htmlFor="shape">Pick a Shape</label>
           <select name="shape" id="shapepicker" onChange={handleShapeChange}>
             <option value="square">Square</option>
-            <option value="square">Rectangle</option>
+            <option value="rectangle">Rectangle</option>
           </select>
         </div>
+        <button type="submit">Generate</button>
       </form>
+      {submitted && <Generator floor={floor} shape={shape}></Generator>}
     </>
   );
 }
