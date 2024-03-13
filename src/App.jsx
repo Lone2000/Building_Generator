@@ -10,7 +10,6 @@ function App() {
       <main>
         <h1>Builder Generator</h1>
         <Information></Information>
-        <Generator></Generator>
         <InputForm></InputForm>
       </main>
     </>
